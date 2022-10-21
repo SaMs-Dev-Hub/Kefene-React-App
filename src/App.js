@@ -9,9 +9,9 @@ import Users from "./component/Users/Users";
 function App() {
   return (
     <>
-       <Navbar />
+    
       <Routes>
-        <Route path="/login" element={<Form />} />
+        <Route path="/" element={<Form />} />
         <Route path="/orders" element={<Order />} />
         <Route path="/products" element={<Product />} />
         <Route path="/users" element={<Users />} />

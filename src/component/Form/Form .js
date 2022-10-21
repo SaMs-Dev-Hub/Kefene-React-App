@@ -2,6 +2,7 @@ import React from "react";
 import style from  "./Form.module.css"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../component/Navbar";
 import {
   MDBContainer,
   MDBInput,
@@ -33,10 +34,15 @@ function Form() {
       setauthenticated(true);
       localStorage.setItem("authenticated", true);
       navigate("/orders");
+      alert('Login Successful!')
+    }else{
+      alert(`Please Enter Valid Credentials ${text} ${passText}`)
     }
   };
 
   return (
+    <>
+       <Navbar />
     <MDBContainer className={ style.containerl }>
       <div className={style.container}>
         <h1 className={style.mb}>Sign In</h1>
@@ -65,6 +71,7 @@ function Form() {
         </MDBBtn>
       </div>
     </MDBContainer>
+    </>
   );
 }
 

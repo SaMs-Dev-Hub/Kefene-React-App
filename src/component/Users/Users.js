@@ -3,6 +3,7 @@ import { getUsers } from "../service/Index";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import style from  "./User.module.css";
+import Navbar from "../../component/Navbar";
 const Users = () => {
   const [user, setUser] = useState([]);
   const [authenticated, setauthenticated] = useState(null);
@@ -47,11 +48,12 @@ const Users = () => {
   setFilter(user)}
 
   if (authenticated === "false") {
-    navigate("/login");
+    navigate("/");
     return <div></div>;
   } else {
     return (
       <>
+        <Navbar />
         <div className={style.divContainer}>
           <h1>Users</h1>
           <span>
@@ -94,7 +96,7 @@ const Users = () => {
                 return (
                   <tr className={style.active}  key={userList.profilePic}>
                     <td className={style.column11}>{userList.id}</td>
-                    <td className={style.column21}>{userList.profilePic}</td>
+                    <td className={style.column21}><img src={userList.profilePic} alt="Profile pic"/></td>
                     <td className={style.column31}>{userList.fullName}</td>
                     <td className={style.column41}>{userList.dob}</td>
                     <td className={style.column51}>{userList.gender}</td>

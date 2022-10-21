@@ -23,6 +23,9 @@ useEffect(()=>{
  }else{
   setLogout(false)
  }
+ if(window.location.pathname==='/'){
+  setLogout(false)
+ }
 
 },[])
   const handleOpenNavMenu = (event) => {
@@ -34,7 +37,7 @@ useEffect(()=>{
   };
   const onLogout = ()=>{
     localStorage.setItem("authenticated", false);
-     
+    setLogout(false)
   }
 
   return (
@@ -169,9 +172,9 @@ useEffect(()=>{
               </Button>
             </Link>
           </Box>
-          <Link to={"/login"} style={{ textDecoration: "none" }}>
+          <Link to={"/"} style={{ textDecoration: "none" }}>
           <Box sx={{ flexGrow: 0 }}>
-          <Typography textAlign="center" onClick={onLogout}>Logout</Typography>
+          {logout && <Typography textAlign="center" onClick={onLogout}>Logout</Typography>}
           </Box>
           </Link>
         </Toolbar>

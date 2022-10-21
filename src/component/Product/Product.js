@@ -3,9 +3,15 @@ import style from './Product.module.css'
 import { useEffect,useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { getProducts } from '../service/Index';
+import Navbar from "../../component/Navbar";
 const Product = () => {
     const [product, setProduct] = useState([]);
     const [authenticated, setauthenticated] = useState(null);
+    const [listCount, setListCount] = useState(0);
+    const [expired, setExpired] = useState(true);
+    const [lowStock, setStock] = useState(true);
+  const [products, setProducts] = useState([]);
+
     const navigate = useNavigate();
     useEffect(()=>{
       const loggedInUser = localStorage.getItem("authenticated");
@@ -16,23 +22,89 @@ const Product = () => {
     }
        getProducts().then((res) => {
           console.log("resolve from product", res);
+          setProducts(res)
+          setListCount(res.length)
           setProduct(res)
           }).catch((err)=>{
           console.log('error coming= ',err)
           })
      },[])
+
+    //  let pushArr = product;
+     const handleChange = (e) => { 
+      let pushArr = products;
+       const value = e.target.value;
+       const flag = e.target.checked;
+       let vehicle1 = true;
+       let vehicle2 = true;
+ 
+       let pushVehicle1 = false;
+       let pushVehicle2 = false;
+ 
+       if (value === "vehicle1") {
+         vehicle1 = flag
+         pushVehicle1 = flag
+       }
+       if (value === "vehicle2") {
+         vehicle2 = flag
+         pushVehicle2 = flag
+       }
+ 
+       const arr = product;
+       if (!vehicle1) {
+         for (let i = 0; i < arr.length; i++) {
+          var apiDate = arr[i].expiryDate
+          var currDate = new Date();
+          if (new Date(apiDate) < currDate ) {
+             arr.splice(i, 1);
+             i--;
+           }
+         }
+       }
+       if (!vehicle2) {
+         for (let i = 0; i < arr.length; i++) {
+           if (arr[i].stock<100 ) {
+             arr.splice(i, 1);
+             i--;
+           }
+         }
+       }
+     
+   
+       if (pushVehicle1) {
+        for (let i = 0; i < pushArr.length; i++) {
+          var apiDate = pushArr[i].expiryDate
+          var currDate = new Date();
+          if (new Date(apiDate) < currDate ) {
+             arr.push(pushArr[i]);
+           }
+         }
+       }
+       if (pushVehicle2) {
+        for (let i = 0; i < pushArr.length; i++) {
+          if (pushArr[i].stock < 100 ) {
+            arr.push(pushArr[i]);
+          }
+        }
+       } 
+    
+       setProduct([...arr])
+       setListCount(product.length)
+     };
+
      if(authenticated==='false'){
-      navigate("/login");
+      navigate("/");
      return <div></div>
      }else{
       return (
         <>
+        <Navbar />
       <h1>Product</h1>
       <h5>Filter</h5>
-      <h6>count:</h6>
+      <h6>count:{listCount}</h6>
       <div className={style.checkbox}>
-      <span className={style.inputorder}><input type="checkbox" id="vehicle1" name="vehicle1"/>Expired</span><br/>
-      <span className={style.inputorder}><input type="checkbox" id="vehicle1" name="vehicle1"/>Low stock</span><br/>
+      <span className={style.inputorder}><input defaultChecked={expired} type="checkbox" id="vehicle1" value="vehicle1" onChange={handleChange}/>Expired</span><br/>
+      <span classvalue={style.inputorder}><input defaultChecked={lowStock} type="checkbox" id="vehicle2" value="vehicle2" onChange={handleChange}/>Low stock</span><br/>
       </div>
       <div className={style.subContainer}></div>
 
@@ -82,3 +154,4 @@ const Product = () => {
 }
 
 export default Product
+

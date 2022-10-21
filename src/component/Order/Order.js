@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getOrders } from "../service/Index";
 import { useNavigate } from "react-router-dom";
 import style from "./Order.module.css";
+import Navbar from "../../component/Navbar";
 const Order = () => {
   const [orderData, setorderData] = useState([]);
   const [authenticated, setauthenticated] = useState(null);
@@ -9,125 +10,142 @@ const Order = () => {
   const [pack, setPack] = useState(true);
   const [intransit, setIntarnsit] = useState(true);
   const [deliever, setDeliever] = useState(true);
+  const [orderApiData, setorderApiData] = useState([]);
+  const [listCount, setListCount] = useState(0);
 
   const navigate = useNavigate();
   useEffect(() => {
     const loggedInUser = localStorage.getItem("authenticated");
     if (loggedInUser === "true") {
       setauthenticated(loggedInUser);
+      
     } else {
       setauthenticated("false");
+     
     }
     getOrders()
-      .then((res) => {
-        // console.log("resolve from Orders", res);
+      .then((res) => { 
+        setorderApiData(res.data);
         setorderData(res.data);
+        setListCount(res.data.length);
       })
       .catch((err) => {
         console.log("error coming= ", err);
       });
-    checkFilter();
+    // checkFilter();
   }, []);
-
-  const handleChange = (e) => {
-    console.log("event from value", e.target.value);
-    console.log("event from onchange", e.target.checked);
+  let pushArr = orderApiData;
+  const handleChange = (e) => { 
     const value = e.target.value;
     const flag = e.target.checked;
+    let vehicle1 = true;
+    let vehicle2 = true;
+    let vehicle3 = true;
+    let vehicle4 = true;
+    let pushVehicle1 = false;
+    let pushVehicle2 = false;
+    let pushVehicle3 = false;
+    let pushVehicle4 = false;
     if (value === "vehicle1") {
-      setNewitem(flag);
+      vehicle1 = flag
+      pushVehicle1 = flag
     }
     if (value === "vehicle2") {
-      setPack(flag);
+      vehicle2 = flag
+      pushVehicle2 = flag
     }
     if (value === "vehicle3") {
-      setIntarnsit(flag);
+      vehicle3 = flag
+      pushVehicle3 = flag
     }
     if (value === "vehicle4") {
-      setDeliever(flag);
+      vehicle4 = flag
+      pushVehicle4 = flag
     }
-    checkFilter();
-  };
-  const checkFilter = () => {
-    const arr = [];
-    // for (let i = 0; i < res.length; i++) {
-    // if (newitem && pack && intransit && deliever) {
-    //   setorderData(res);
-    //   res.map((ele) => {
-    //     if (ele.orderStatus === "Delivered") {
-    //       arr.push(ele);
-    //     }
-    //   });
-    // }
-    if (newitem == true) {
-      orderData.map((ele) => {
+   
+    var data1 = ['New'];
+    var data2 = ['Packed'];
+    var data3 = ['InTransit'];
+    var data4 = ['Delivered'];
+    const arr = orderData;
+    if (!vehicle1) {
+      for (let i = 0; i < arr.length; i++) {
+        if (data1.indexOf(arr[i].orderStatus) != -1) {
+          arr.splice(i, 1);
+          i--;
+        }
+      }
+    }
+    if (!vehicle2) {
+      for (let i = 0; i < arr.length; i++) {
+        if (data2.indexOf(arr[i].orderStatus) != -1) {
+          arr.splice(i, 1);
+          i--;
+        }
+      }
+    }
+    if (!vehicle3) {
+      for (let i = 0; i < arr.length; i++) {
+        if (data3.indexOf(arr[i].orderStatus) != -1) {
+          arr.splice(i, 1);
+          i--;
+        }
+      }
+    }
+    if (!vehicle4) {
+      for (let i = 0; i < arr.length; i++) {
+        if (data4.indexOf(arr[i].orderStatus) != -1) {
+          arr.splice(i, 1);
+          i--;
+        }
+      }
+    }
+  
+
+    if (pushVehicle1) {
+      pushArr.map((ele) => {
         if (ele.orderStatus === "New") {
           arr.push(ele);
         }
       });
     }
-    if (pack == true) {
-      orderData.map((ele) => {
+    if (pushVehicle2) {
+      pushArr.map((ele) => {
         if (ele.orderStatus === "Packed") {
           arr.push(ele);
         }
       });
     }
-    if (intransit == true) {
-      orderData.map((ele) => {
+    if (pushVehicle3) {
+      pushArr.map((ele) => {
         if (ele.orderStatus === "InTransit") {
           arr.push(ele);
         }
       });
     }
-    if (deliever == true) {
-      orderData.map((ele) => {
+    if (pushVehicle4) {
+      pushArr.map((ele) => {
         if (ele.orderStatus === "Delivered") {
           arr.push(ele);
         }
       });
     }
-    if (newitem != true) {
-      orderData.map((ele, i) => {
-        if (ele.orderStatus === "New") {
-          arr.splice(i, 1);
-        }
-      });
-    }
-    if (pack != true) {
-      orderData.map((ele, i) => {
-        if (ele.orderStatus === "Packed") {
-          arr.splice(i, 1);
-        }
-      });
-    }
-    if (intransit != true) {
-      orderData.map((ele, i) => {
-        if (ele.orderStatus === "InTransit") {
-          arr.splice(i, 1);
-        }
-      });
-    }
-    if (deliever != true) {
-      orderData.map((ele, i) => {
-        if (ele.orderStatus === "Delivered") {
-          arr.splice(i, 1);
-        }
-      });
-    }
-    // }
-    setorderData(arr);
+ 
+    setorderData([...arr])
+    setListCount(orderData.length)
   };
+ 
   if (authenticated === "false") {
-    navigate("/login");
+    navigate("/");
     return <div></div>;
   } else {
     return (
       <>
+       <Navbar />
         <div>
           <h1> Order</h1>
           <h5>Filter</h5>
-          <h6>count:</h6>
+          <h6>count:{listCount}</h6>
           <div className={style.checkbox}>
             <span className={style.inputorder}>
               <input
