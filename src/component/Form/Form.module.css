@@ -1,0 +1,58 @@
+.mb {
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.pass {
+  width: 100%;
+  background-color: aliceblue;
+
+  border: none;
+  outline: none;
+  margin-top: 15px;
+}
+.mail {
+  width: 100%;
+  background-color: aliceblue;
+
+  border: none;
+  outline: none;
+  margin-top: 15px;
+}
+.login {
+  width: 100%;
+  border-radius: 30px;
+  padding: 14px 36px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  background-color: #20b883;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-top: 24px;
+}
+.login:hover {
+  color: #fff !important;
+  text-decoration: none;
+}
+.containerl {
+  background-color: aliceblue;
+  box-shadow: 1px 1px #f0eaea;
+  height: 300px;
+  justify-content: center;
+  max-width: 40%;
+  border-radius: 20px;
+margin-top: 70px;
+padding-top: 50px;
+padding-right: 50px;
+}
+
+.container {
+  margin-left: 150px;
+}

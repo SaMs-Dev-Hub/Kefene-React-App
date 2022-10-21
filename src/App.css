@@ -1,38 +1,78 @@
-.App {
-  text-align: center;
+/* body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
 }
+.pass{
+width: 60%;
+ background-color: aliceblue;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  border: none;
+  outline: none;
+  margin-top: 15px;
 }
+.mail{
+  width: 60%;
+  background-color: aliceblue;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+   border: none;
+   outline: none;
+   margin-top: 15px;
+}
+.login{
+  width: 60%;
+  border-radius: 30px;
+  padding: 14px 36px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  background-color: #20b883;
+  color:aliceblue;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-top: 15px;
+  text-decoration: none;
+}
+.login:hover {
+  color: #fff !important;
+  text-decoration: none;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.container-l{
+  background-color:aliceblue;
+  box-shadow: 1px 1px #f0eaea;
+  height: 300px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+max-width: 40%;
+border-radius: 20px;
+translate: 210px;
 }
 
-.App-link {
-  color: #61dafb;
+.container{
+  margin-left: 150px;
+ 
+}
+.checkbox{
+  margin-left: 80px;
+  padding: 20px;
+  color: black;
+}
+input{
+  margin-right: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+element.style {
 }
+.Homepage_MainHeading__3eRiM {
+    margin: 0;
+}
+
+h1 {
+   margin-left: 100px;
+   margin-top: 50px;
+    font-weight: bold;
+    color: black;
+}
+h5,h6{
+  margin-left: 100px;
+  margin-top: 20px;
+  color: black;
+} */
