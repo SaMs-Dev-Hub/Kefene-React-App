@@ -172,8 +172,10 @@ function ResponsiveAppBar() {
           <Link to={"/"} style={{ textDecoration: "none" }}>
             <Box sx={{ flexGrow: 0 }}>
               {logout && (
-                <Typography textAlign="center" onClick={onLogout}>
-                  Logout
+                <Typography textAlign="center">
+                  <Button onClick={onLogout} variant="contained">
+                    Logout
+                  </Button>
                 </Typography>
               )}
             </Box>

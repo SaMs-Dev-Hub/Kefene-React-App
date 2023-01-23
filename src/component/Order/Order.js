@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { getOrders } from "../service/Index";
-import { useNavigate } from "react-router-dom";
 import style from "./Order.module.css";
 import Navbar from "../../component/Navbar";
 const Order = () => {
   const [orderData, setorderData] = useState([]);
-  const [listCount, setListCount] = useState(0);
   const [orderType, setorderType] = useState([
     { id: 1, value: "New" },
     { id: 2, value: "Packed" },
@@ -14,46 +12,37 @@ const Order = () => {
   ]);
   const [checkedItems, setcheckedItems] = useState(new Map());
   const updateMap = () => {
-    orderType.map((item)=>{
-      setcheckedItems(checkedItems.set(item.value,true));
-    })
-  }
- 
-
+    orderType.map((item) => {
+      setcheckedItems(checkedItems.set(item.value, true));
+    });
+  };
   useEffect(() => {
     getOrders()
       .then((res) => {
         // console.log('respnse = ',res)
         setorderData(res.data);
-        setListCount(res.data.length);
       })
       .catch((err) => {
         console.log("error coming= ", err);
       });
-      updateMap()
-    
+    updateMap();
   }, []);
-
 
   const handleChange = (e) => {
     var isChecked = e.target.checked;
     var item = e.target.value;
-    console.log( 'items = ',item ,isChecked)
+    // console.log( 'items = ',item ,isChecked)
     setcheckedItems((map) => new Map(map.set(item, isChecked)));
-    console.log(checkedItems);
-  
   };
-  
   return (
     <>
       <Navbar />
       <div>
         <h1> Order</h1>
         <h5>Filter</h5>
-        <h6>count:{listCount}</h6>
         <div className={style.checkbox}>
           {orderType.map((item) => (
-            <li style={{listStyle:"none"}}>
+            <li style={{ listStyle: "none" }}>
               <label>
                 <input
                   defaultChecked={true}
@@ -91,22 +80,18 @@ const Order = () => {
       </div>
 
       <div className={style.tableData}>
-       
-        {orderData.map((userList, index,arr) => {
-          if(checkedItems.get(userList.orderStatus)) {
-          
-            console.log(Number(checkedItems.get(userList.orderStatus)))
-            // setListCount(index+1);
-          return (
-          
-            <tr className={style.active} key={userList.profilePic}>
-              <td className={style.columnp1}>{userList.id}</td>
-              <td className={style.columnp2}>{userList.customerName}</td>
-              <td className={style.columnp3}>{userList.orderDate}</td>
-              <td className={style.columnp4}>{userList.amount}</td>
-              <td className={style.columnp5}>{userList.orderStatus}</td>
-            </tr>
-          )}
+        {orderData.map((userList, index) => {
+          if (checkedItems.get(userList.orderStatus)) {
+            return (
+              <tr className={style.active} key={index}>
+                <td className={style.columnp1}>{userList.id}</td>
+                <td className={style.columnp2}>{userList.customerName}</td>
+                <td className={style.columnp3}>{userList.orderDate}</td>
+                <td className={style.columnp4}>{userList.amount}</td>
+                <td className={style.columnp5}>{userList.orderStatus}</td>
+              </tr>
+            );
+          }
         })}
       </div>
     </>
