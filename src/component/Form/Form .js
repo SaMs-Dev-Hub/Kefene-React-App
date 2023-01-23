@@ -1,5 +1,5 @@
 import React from "react";
-import style from  "./Form.module.css"
+import style from "./Form.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../component/Navbar";
@@ -11,14 +11,10 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 
-
 function Form() {
   const navigate = useNavigate();
   const [text, setText] = useState("");
   const [passText, setpasstext] = useState("");
-  const [authenticated, setauthenticated] = useState(
-    localStorage.getItem(localStorage.getItem("authenticated") || false)
-  );
   const onClick = (e) => {
     const value = e.target.value;
     console.log(value);
@@ -31,46 +27,47 @@ function Form() {
   };
   const onLogin = () => {
     if (text === passText) {
-      setauthenticated(true);
       localStorage.setItem("authenticated", true);
       navigate("/orders");
-      alert('Login Successful!')
-    }else{
-      alert(`Please Enter Valid Credentials ${text} ${passText}`)
+      alert("Login Successful!");
+    } else {
+      alert(
+        `Please Enter Valid Credentials  Email and Password should be same  ${text}  ${passText}`
+      );
     }
   };
 
   return (
     <>
-       <Navbar />
-    <MDBContainer className={ style.containerl }>
-      <div className={style.container}>
-        <h1 className={style.mb}>Sign In</h1>
-        <div>
+ 
+      <MDBContainer className={style.containerl}>
+        <div className={style.container}>
+          <h1 className={style.mb}>Log In</h1>
+          <div>
+            <MDBInput
+              wrapperClass={style.mail}
+              label="Email address"
+              id="form1"
+              type="text"
+              value={text}
+              onChange={onClick}
+            />
+          </div>
           <MDBInput
-            wrapperClass={style.mail}
-            label="Email address"
-            id="form1"
-            type="text"
-            value={text}
-            onChange={onClick}
+            wrapperClass={style.pass}
+            label="Password"
+            id="form2"
+            type="password"
+            value={passText}
+            onChange={onClickPass}
+            
           />
-        </div>
-        <MDBInput
-          wrapperClass={style.pass}
-          label="Password"
-          id="form2"
-          type="password"
-          value={passText}
-          onChange={onClickPass}
-        />
 
-       
-        <MDBBtn className={style.login} onClick={onLogin}>
-          Login
-        </MDBBtn>
-      </div>
-    </MDBContainer>
+          <MDBBtn className={style.login} onClick={onLogin}>
+            Login
+          </MDBBtn>
+        </div>
+      </MDBContainer>
     </>
   );
 }

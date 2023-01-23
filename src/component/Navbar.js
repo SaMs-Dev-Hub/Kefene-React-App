@@ -9,25 +9,24 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 
 import Button from "@mui/material/Button";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 
 import { Link } from "react-router-dom";
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-const [logout, setLogout] = useState()
-useEffect(()=>{
- if(localStorage.getItem("authenticated")==='true'){
-  setLogout(true)
- }else{
-  setLogout(false)
- }
- if(window.location.pathname==='/'){
-  setLogout(false)
- }
-
-},[])
+  const [logout, setLogout] = useState();
+  useEffect(() => {
+    if (localStorage.getItem("authenticated") === "true") {
+      setLogout(true);
+    } else {
+      setLogout(false);
+    }
+    if (window.location.pathname === "/") {
+      setLogout(false);
+    }
+  }, []);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -35,10 +34,10 @@ useEffect(()=>{
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  const onLogout = ()=>{
+  const onLogout = () => {
     localStorage.setItem("authenticated", false);
-    setLogout(false)
-  }
+    setLogout(false);
+  };
 
   return (
     <AppBar position="static" color="transparent">
@@ -59,7 +58,6 @@ useEffect(()=>{
             variant="h6"
             noWrap
             component="a"
-           
             sx={{
               mr: 3,
               ml: 2,
@@ -117,7 +115,6 @@ useEffect(()=>{
             variant="h5"
             noWrap
             component="a"
-        
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -173,9 +170,13 @@ useEffect(()=>{
             </Link>
           </Box>
           <Link to={"/"} style={{ textDecoration: "none" }}>
-          <Box sx={{ flexGrow: 0 }}>
-          {logout && <Typography textAlign="center" onClick={onLogout}>Logout</Typography>}
-          </Box>
+            <Box sx={{ flexGrow: 0 }}>
+              {logout && (
+                <Typography textAlign="center" onClick={onLogout}>
+                  Logout
+                </Typography>
+              )}
+            </Box>
           </Link>
         </Toolbar>
       </Container>

@@ -1,10 +1,10 @@
 .mb {
   font-size: 2em;
-  margin-block-start: 0.67em;
-  margin-block-end: 0.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+   text-align: center;
   font-weight: bold;
+  position: relative;
+  bottom:10%;
+  right: 11%
 }
 
 .pass {
@@ -16,7 +16,7 @@
   margin-top: 15px;
 }
 .mail {
-  width: 100%;
+  /* width: 100%; */
   background-color: aliceblue;
 
   border: none;
@@ -24,7 +24,7 @@
   margin-top: 15px;
 }
 .login {
-  width: 100%;
+  /* width: 100%; */
   border-radius: 30px;
   padding: 14px 36px;
   font-size: 12px;
@@ -36,6 +36,8 @@
   outline: none;
   cursor: pointer;
   margin-top: 24px;
+  position: relative;
+  bottom: 5%;
 }
 .login:hover {
   color: #fff !important;
@@ -44,15 +46,14 @@
 .containerl {
   background-color: aliceblue;
   box-shadow: 1px 1px #f0eaea;
-  height: 300px;
+  height: 400px;
   justify-content: center;
-  max-width: 40%;
+ width: 30%;
   border-radius: 20px;
 margin-top: 70px;
-padding-top: 50px;
-padding-right: 50px;
+
 }
 
 .container {
-  margin-left: 150px;
+  /* margin-left: 150px; */
 }
