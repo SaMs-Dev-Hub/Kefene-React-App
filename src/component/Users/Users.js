@@ -2,12 +2,13 @@ import React from "react";
 import { getUsers } from "../service/Index";
 import { useEffect, useState } from "react";
 import style from "./User.module.css";
+import Navbar from "../../component/Navbar";
 
 const Users = () => {
   const [user, setUser] = useState([]);
   const [filter, setFilter] = useState([]);
   const [text, setText] = useState("");
-  
+
   useEffect(() => {
     getUsers()
       .then((res) => {
@@ -44,6 +45,7 @@ const Users = () => {
 
   return (
     <>
+    <Navbar />
       <div className={style.divContainer}>
         <h1>Users</h1>
         <span>
