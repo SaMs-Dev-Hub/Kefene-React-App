@@ -6,9 +6,7 @@ import Navbar from "../../component/Navbar";
 import {
   MDBContainer,
   MDBInput,
-  MDBCheckbox,
   MDBBtn,
-  MDBIcon,
 } from "mdb-react-ui-kit";
 
 function Form() {
@@ -39,7 +37,7 @@ function Form() {
 
   return (
     <>
- 
+     <Navbar />
       <MDBContainer className={style.containerl}>
         <div className={style.container}>
           <h1 className={style.mb}>Log In</h1>
